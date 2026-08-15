@@ -164,5 +164,5 @@ Or open the Excel dashboard directly — all results are pre-computed in the wor
 
 This project was built as a portfolio piece for business analyst and product management roles. The dataset is synthetic (generated with realistic statistical distributions) but the analysis methodology, SQL patterns, and business recommendations mirror real-world credit risk work.
 
-**Author:** Ayush Jha
+**Author:** Kavya Raval
 **Institution:** NMIMS University, Mumbai — BTech Electrical, Electronics & Communications Engineering
