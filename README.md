@@ -4,6 +4,10 @@ A business analyst project analyzing a **150,000-loan credit card portfolio** ac
 
 Built with **SQL** (multi-table JOINs, window functions, CASE-based scoring) and **Excel** (dashboard with charts, conditional formatting, data bars).
 
+**Status:** completed analysis · **synthetic dataset** (generated, not real bank data), so the findings and the ~$60M projection illustrate the method and are not claims about a real lender · the data-generation and cleaning scripts are not included in this repository
+
+**Intended reader:** a hiring manager or product/risk team who wants to see how a messy multi-table dataset becomes a clear underwriting recommendation.
+
 ---
 
 ## Key Findings
@@ -138,31 +142,29 @@ Tighten approval criteria for borrowers with **utilization >50% AND delinquencie
 
 - **SQL** (SQLite) — multi-table JOINs, window functions, CASE expressions, aggregate functions, subqueries
 - **Excel** — pivot-style dashboard, bar/line charts, conditional formatting with data bars, color-coded risk scores
-- **Python** (pandas, openpyxl) — data generation, cleaning pipeline, dashboard automation
+- **Python** (pandas, openpyxl) — data generation, cleaning pipeline, dashboard automation (these scripts are not in this repository)
 
 ---
 
-## How to Run
+## How to Use
 
-```bash
-# Load the raw CSVs into any SQL database (SQLite, PostgreSQL, MySQL)
-sqlite3 portfolio.db
-.mode csv
-.import raw_customers.csv raw_customers
-.import raw_loans.csv raw_loans
-.import raw_payments.csv raw_payments
+**Start with the Excel workbook.** Open `Credit_Card_Portfolio_Risk_Analysis_V2.xlsx`: all results are pre-computed, beginning with the *Executive Summary* sheet.
 
-# Run the analysis queries
-.read portfolio_analysis_v2.sql
-```
+**Running the SQL.** `portfolio_analysis_v2.sql` is written against *cleaned* tables (`customers`, `loans` with fields such as `income_bracket` and `defaulted`, and a loan-level `payment_summary`). The three `raw_*.csv` files are the messy inputs, and the cleaning step that produces those tables is documented in the workbook's *Data Cleaning Log* sheet but is not included as code. So the queries will not run directly on the raw CSVs. To reproduce them, first rebuild the cleaned tables by following the 13 logged cleaning steps.
 
-Or open the Excel dashboard directly — all results are pre-computed in the workbook.
+---
+
+## Limitations
+
+- The dataset is synthetic. Default rates and the ~$60M loss reduction come from simulated data and a simple scorecard, and have not been tested on real portfolios.
+- The scorecard is validated across the whole portfolio. No separate held-out test set is described.
+- The cleaning and data-generation code is missing, so the pipeline cannot be re-run end to end from this repository.
 
 ---
 
 ## About
 
-This project was built as a portfolio piece for business analyst and product management roles. The dataset is synthetic (generated with realistic statistical distributions) but the analysis methodology, SQL patterns, and business recommendations mirror real-world credit risk work.
+This project was built as a portfolio piece for business analyst and product management roles. The dataset is synthetic (generated with realistic statistical distributions), and the analysis methodology and SQL patterns follow common credit-risk practice.
 
 **Author:** Kavya Raval
-**Institution:** NMIMS University, Mumbai — BTech Electrical, Electronics & Communications Engineering
+**Institution:** NMIMS University, Mumbai — B.Tech, Electronics & Telecommunication Engineering
